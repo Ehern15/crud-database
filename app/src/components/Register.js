@@ -6,12 +6,12 @@ const Register = () => {
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
     const [email,setEmail] = useState('');
-    const [userName,setUserName] = useState('');
+    const [username,setUserName] = useState('');
     const [password,setPassword] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('',{firstName,lastName,email,userName,password})
+        axios.post('http://localhost:5000/register',{firstName,lastName,email,username,password})
         .then(result => console.log(result))
         .catch(err => console.log(err))
     }
@@ -56,7 +56,7 @@ const Register = () => {
                     type="text" 
                     id="user" 
                     name="user" 
-                    value = {userName}
+                    value = {username}
                     onChange={(e) => setUserName(e.target.value)}
                     />
                 </div>
@@ -69,10 +69,6 @@ const Register = () => {
                     value = {password}
                     onChange={(e) => setPassword(e.target.value)} 
                     />
-                </div>
-                <div>
-                    <label for="pwd">Confirm Password:</label>
-                    <input type="password" id="pwd" name="pwd"/>
                 </div>
                 <input type="submit" value="Register" />
             </form>

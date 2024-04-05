@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 const Register = () => {
     const [firstName,setFirstName] = useState('');
@@ -7,11 +8,18 @@ const Register = () => {
     const [email,setEmail] = useState('');
     const [userName,setUserName] = useState('');
     const [password,setPassword] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post('',{firstName,lastName,email,userName,password})
+        .then(result => console.log(result))
+        .catch(err => console.log(err))
+    }
     return (
         <div>
             <Link to="/">Home</Link>
             <h1>Register Page</h1>
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label for="name">First name:</label>
                     <input 

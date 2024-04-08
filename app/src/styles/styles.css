@@ -1,0 +1,66 @@
+html {
+    display: flex;
+    justify-content: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: #e3ecfa;
+}
+button {
+    background-color: #7c9fd6;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+button:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+input[type=text], input[type=password], input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+hr {
+    border: 1px solid black;
+    margin-bottom: 25px;
+  }
+.register_container {
+    width: 30em;
+}
+.login_container {
+    width: 30em;
+    
+}
+.submit_container {
+    display: flex;
+    justify-content: center;
+}
+input[type=submit] {
+    background-color: #7c9fd6;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+}
+input[type=submit]:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+.home_button {
+    font-size: 25px;
+    display: inline-block;
+    position: absolute;
+    left: 100px;
+    top: 30px;
+    width: 100%;
+}
+
+h1 {
+    margin-top: 100px;
+}

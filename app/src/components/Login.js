@@ -14,9 +14,12 @@ const Login = () => {
     }
     return (
         <div>
-            <Link to="/">Home</Link>
+            <Link to="/" class="home_button">Home</Link>
             <h1>Login Page</h1>
-            <form onSubmit={handleSubmit}>
+            <p>Enter your username and password</p>
+            <hr></hr>
+            <div class="login_container">
+            <form onSubmit={handleSubmit} class="login">
                 <div>
                 <label for="user">Username:</label>
                 <input 
@@ -38,8 +41,12 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 />
                 </div>
-                <input type="submit" value="Login"/>
+                <div class="submit_container">
+                    <input type="submit" value="Login"/>
+                    </div>
             </form>
+            </div>
+            
         </div>
     );
 };

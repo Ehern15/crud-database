@@ -1,14 +1,21 @@
 import React, { useState, useContext } from "react";
-import { Link, redirect, Navigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import AuthContext from "../context/AuthProvider";
+import { useAuth } from "../context/AuthProvider";
+
+
 
 const Login = () => {
-    const { setAuth } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
-    const [loggedIn,setLoggedIn] = useState(false);
-
+    const {
+        auth,
+        setAuth,
+        isLoggedIn,
+        setIsLoggedIn
+    } = useAuth();
+    const [loginFail, setLoginFail] = useState(false);
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,11 +24,12 @@ const Login = () => {
             console.log(response);
                 const obj = JSON.stringify(response.data);
                 if(JSON.parse(obj) === 'Login failed'){
-                    
+                    setLoginFail(true);
                 }else{
                     const info = JSON.stringify(response.data[0]);
                     setAuth(JSON.parse(info));
-                    Navigate('/Dashboard')
+                    setIsLoggedIn(true);
+                    navigate('/Dashboard');
                 } 
         })
         .catch(err => console.log(err));
@@ -65,6 +73,11 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 />
                 </div>
+                {loginFail ? (
+                        <p class="error_message">Username or Password incorrect!</p>
+                    ) : (
+                        <p></p>
+                    )}
                 <div class="submit_container">
                     <input type="submit" value="Login"/>
                     </div>

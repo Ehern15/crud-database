@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const port = process.env.PORT || 5000;
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
@@ -26,23 +26,25 @@ app.post('/register', (req, res) => {
   const email = req.body.email;
   const username = req.body.username;
   const password = req.body.password;
-  
-  connection.query('INSERT INTO users (username,first_name,last_name,password,email) VALUES (?, ?, ?, ?, ?)', [username,firstName,lastName,password,email], (err, rows, fields) => {
-    if (err) throw err
+
+  connection.query('INSERT INTO users (username,first_name,last_name,password,email) VALUES (?, ?, ?, ?, ?)', [username, firstName, lastName, password, email], (err, rows, fields) => {
+    if (err) { return res.json(err)} else {
+      return res.json('success');
+    }
 
   });
 });
 
 
-app.post('/login', (req,res) => {
+app.post('/login', (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  connection.query('SELECT * FROM users WHERE username = ? AND password= ?' ,[username,password], (err, rows) => {
-    if(err) return res.json("Login failed");
-    if(rows.length > 0){
+  connection.query('SELECT * FROM users WHERE username = ? AND password= ?', [username, password], (err, rows) => {
+    if (err) return res.json("Login failed");
+    if (rows.length > 0) {
       return res.json(rows);
-    }else{
+    } else {
       return res.json("Login failed");
     }
   });

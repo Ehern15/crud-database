@@ -1,17 +1,41 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, redirect, Navigate } from "react-router-dom";
 import axios from 'axios';
+import AuthContext from "../context/AuthProvider";
 
 const Login = () => {
-    const [userName,setUserName] = useState('');
+    const { setAuth } = useContext(AuthContext);
+    const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
+    const [loggedIn,setLoggedIn] = useState(false);
+
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('',{userName,password})
-        .then(result => console.log(result))
-        .catch(err => console.log(err))
+        axios.post('http://localhost:5000/login',{username,password})
+        .then(response => {
+            console.log(response);
+                const obj = JSON.stringify(response.data);
+                if(JSON.parse(obj) === 'Login failed'){
+                    
+                }else{
+                    const info = JSON.stringify(response.data[0]);
+                    setAuth(JSON.parse(info));
+                    Navigate('/Dashboard')
+                } 
+        })
+        .catch(err => console.log(err));
+        setUsername('');
+        setPassword('');
+        
     }
+    const loader = async () => {
+        const user = await setAuth();
+        if (!user) {
+          return redirect("/Dashboard");
+        }
+        return null;
+      };
     return (
         <div>
             <Link to="/" class="home_button">Home</Link>
@@ -27,8 +51,8 @@ const Login = () => {
                 required 
                 id="user"
                 name="user"
-                value = {userName}
-                onChange={(e) => setUserName(e.target.value)}
+                value = {username}
+                onChange={(e) => setUsername(e.target.value)}
                 />
                 </div>
                 <div>

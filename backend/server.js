@@ -3,7 +3,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const mysql = require('mysql')
 const cors = require('cors');
-const db = require('./database/database');
 
 const port = process.env.PORT || 5000;
 
@@ -34,7 +33,20 @@ app.post('/register', (req, res) => {
   });
 });
 
-//TODO: login
+
+app.post('/login', (req,res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  connection.query('SELECT * FROM users WHERE username = ? AND password= ?' ,[username,password], (err, rows) => {
+    if(err) return res.json("Login failed");
+    if(rows.length > 0){
+      return res.json(rows);
+    }else{
+      return res.json("Login failed");
+    }
+  });
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

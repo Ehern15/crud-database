@@ -1,6 +1,4 @@
 import React from "react";
-// Importing Link from react-router-dom to 
-// navigate to different end points.
 import { Link } from "react-router-dom";
 import '../styles/styles.css';
 

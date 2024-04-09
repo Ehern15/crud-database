@@ -8,6 +8,7 @@ import {
 import Login from './components/Login';
 import Register from'./components/Register';
 import Home from './components/Home';
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
           <Route
           path="/Register"
           element = {<Register/>}
+          />
+          <Route
+          path="/Dashboard"
+          element = {<Dashboard/>}
           />
           <Route
           path="*"

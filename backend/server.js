@@ -14,7 +14,7 @@ app.use(express.json());
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'password',
+  password: '!9Dayo2390',
   database: 'crud_project',
 })
 
@@ -28,7 +28,7 @@ app.post('/register', (req, res) => {
   const password = req.body.password;
 
   connection.query('INSERT INTO users (username,first_name,last_name,password,email) VALUES (?, ?, ?, ?, ?)', [username, firstName, lastName, password, email], (err, rows, fields) => {
-    if (err) { return res.json(err)} else {
+    if (err) { return res.json(err) } else {
       return res.json('success');
     }
 
@@ -50,6 +50,21 @@ app.post('/login', (req, res) => {
   });
 });
 
+app.get('/database', (req, res) => {
+  connection.query('SELECT * FROM crud_project.users;', (err, rows) => {
+    if (err) { throw err } else {
+      return res.json(rows);
+    }
+  });
+});
+
+app.post('/delete', (req, res) => {
+  const username = req.body.username;
+  connection.query('DELETE FROM users WHERE username = ?', [username], (err,res) => {
+    if (err) throw err
+    return res;
+  });
+});
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

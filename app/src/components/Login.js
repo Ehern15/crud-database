@@ -35,7 +35,6 @@ const Login = () => {
         .catch(err => console.log(err));
         setUsername('');
         setPassword('');
-        
     }
     const loader = async () => {
         const user = await setAuth();
